@@ -1,129 +1,61 @@
-# Hunt the Wumpus Game
+# Hunt the Wumpus
 
-Welcome to **Hunt the Wumpus**, a classic text-based adventure game where players navigate a cave, hunt a dangerous creature, and avoid deadly hazards. This game supports multiple cave layouts, hazards, and a scoring system. It also saves high scores for bragging rights!
+A text-based cave exploration game written in C#, based on the classic 1973 Hunt the Wumpus design.
 
----
+## Overview
 
-## 🎮 Features
+Players navigate a cave system, hunt the Wumpus, avoid hazards, and collect gold. The game ships with four distinct cave topologies, each encoded as an adjacency matrix, which determines how rooms connect to one another. Hazards are placed randomly at the start of each game, ensuring replayability. A scoring system tracks performance across the session, and high scores are persisted to disk.
 
-### 🗺️ Cave Systems
-Players can select from four unique cave layouts:
-1. **Dodecahedron Cave**
-2. **The Mobius Strip**
-3. **The String of Beads**
-4. **The Toroidal Hex**
+## Caves
 
-Each cave system presents unique challenges and navigation paths. 
+Choose from four cave layouts at the start of each game:
 
----
+- **Dodecahedron Cave** — the classic 20-room dodecahedron structure
+- **The Mobius Strip** — a twisted loop topology
+- **The String of Beads** — a linear chain of rooms
+- **The Toroidal Hex** — a hex grid with wrap-around edges
 
-### ⚠️ Hazards
-While exploring the cave, watch out for:
-- **Wumpus**: The target of the hunt, but beware—it can kill you if you're in the same room.
-- **Pits**: Falling into a pit means instant death.
-- **Super Bats**: These pesky creatures will pick you up and drop you in a random room.
+## Hazards
 
----
+| Hazard | Effect |
+|---|---|
+| Wumpus | Kills the player on contact |
+| Pits | Instant death if you fall in |
+| Super Bats | Picks you up and drops you in a random room |
 
-### 🏆 Scoring System
-The game includes a detailed scoring system:
-- **+200 points**: Finding gold.
-- **+100 points**: Killing the Wumpus.
-- **-1 point**: Every move you make.
-- **-5 points**: Encountering bats.
-- **-50 points**: Falling into a pit.
-- **-11 points**: Missing a shot at the Wumpus.
+Nearby hazards trigger environmental clues:
+- "You smell a horrid stench..." — Wumpus is adjacent
+- "You feel a draft..." — a pit is adjacent
+- "Bats nearby!" — bats are in an adjacent room
+- "You see something shiny..." — gold is adjacent
 
-Your score is saved and can be viewed in the high score list.
+## Scoring
 
----
+| Action | Points |
+|---|---|
+| Find gold | +200 |
+| Kill the Wumpus | +100 |
+| Each move | -1 |
+| Bat encounter | -5 |
+| Fall into a pit | -50 |
+| Miss a shot | -11 |
 
-## 📋 How to Play
+High scores are saved to `C:\Highscores\WumpusHighScore.txt`.
 
-1. **Start a Game**:
-   - Run the program and select "New Game" from the main menu.
-   - Choose a cave layout.
+## How to Run
 
-2. **Game Commands**:
-   - **Move**: Type `move` to move to another room. You'll need to specify the room number.
-   - **Shoot**: Type `shoot` to fire an arrow into another room. Specify the room number carefully!
-   - **Quit**: Type `quit` to exit the game.
+**Prerequisites:** .NET Framework and Visual Studio (or any C# compiler).
 
-3. **Win Condition**:
-   - Kill the Wumpus while avoiding hazards and collecting gold.
+1. Clone the repository.
+2. Open `HuntTheWumpus.sln` in Visual Studio.
+3. Build and run the project.
 
-4. **Replay Maps**:
-   - If enabled, players can replay the same cave layout after the game ends.
+**Commands during play:**
 
----
+- `move` — move to an adjacent room (enter the room number when prompted)
+- `shoot` — fire an arrow into an adjacent room
+- `quit` — exit the current game
 
-## 📂 Directory and High Score Management
+## License
 
-High scores are saved in a text file located in:
-
-C:\Highscores\WumpusHighScore.txt
-
-
-To view high scores, select "View High Scores" from the main menu.
-
----
-
-## 📖 Instructions
-
-1. **Choose a cave layout.**
-2. **Navigate carefully using the `move` command.**
-3. **Listen for clues**:
-   - *"You smell a horrid stench..."* indicates the Wumpus is nearby.
-   - *"You feel a draft..."* means a pit is adjacent.
-   - *"Bats nearby!"* warns that bats are close.
-   - *"You see something shiny..."* hints at gold nearby.
-
-4. **Hunt the Wumpus and collect gold!**
-
----
-
-## 🛠️ Code Highlights
-
-### Main Components
-- **Cave Design**:
-  The caves are represented as adjacency matrices, which determine room connections.
-- **Hazard Placement**:
-  Randomized placement of hazards ensures replayability.
-- **Scoring System**:
-  Keeps track of moves, encounters, and points.
-
-### Game Loop
-The `PlayGame()` method contains the main game loop, which:
-- Prompts the user for commands.
-- Validates and executes actions.
-- Checks win/lose conditions.
-
-### High Scores
-High scores are stored and managed using a simple file I/O system.
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-- A Windows system (for file paths).
-- A C# compiler (such as Visual Studio).
-
-### Installation
-1. Clone or download the repository.
-2. Open the project in Visual Studio or your preferred IDE.
-3. Build and run the program.
-
----
-
-## 📜 License
-This project is licensed under the MIT License. Feel free to use and modify it as needed!
-
----
-
-## 👩‍💻 Contributing
-Contributions are welcome! If you'd like to improve the game, submit a pull request or open an issue.
-
----
-
-### Happy Hunting! 🏹
+MIT License
